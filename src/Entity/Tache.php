@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TacheRepository;
-use App\Entity\Employe;
-use App\Entity\Projet;
+use App\Entity\Employe;// ici j’importe l’entité Employe pour la relation//
+use App\Entity\Projet;// ici j’importe l’entité projet pour la relation//
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,13 +29,13 @@ class Tache
     private ?string $statut = null;
 
     // ici j’ai lié la tâche à un projet : j’ai mis ManyToOne car un projet peut avoir plusieurs tâches
-// mais une tâche appartient toujours à un seul projet//
+    // mais une tâche appartient toujours à un seul projet//
     #[ORM\ManyToOne(inversedBy: 'taches')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Projet $projet = null;
 
     // ici j’ai lié la tâche à un employé : j’ai aussi mis ManyToOne car un employé peut être sur plusieurs tâches
-// mais une tâche ne peut avoir qu’un seul employé assigné (et c’est facultatif)//
+    // mais une tâche ne peut avoir qu’un seul employé assigné (et c’est facultatif)//
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
     private ?Employe $employeAssigne = null;
@@ -89,26 +89,30 @@ class Tache
         return $this;
     }
 
-    // getter / setter du projet 
+    // ici je récupère le projet auquel la tâche est rattachée
     public function getProjet(): ?Projet
     {
         return $this->projet;
     }
 
+    // ici je définis le projet de la tâche//
     public function setProjet(?Projet $projet): static
     {
         $this->projet = $projet;
         return $this;
     }
 
+    // ici je récupère l’employé assigné à la tâche//
     public function getEmployeAssigne(): ?Employe
     {
         return $this->employeAssigne;
     }
 
+    // ici je choisis quel employé est assigné à la tâche//
     public function setEmployeAssigne(?Employe $employeAssigne): static
     {
         $this->employeAssigne = $employeAssigne;
         return $this;
     }
 }
+
