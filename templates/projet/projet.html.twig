@@ -1,0 +1,139 @@
+{# templates/projet/projet.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# Titre de l’onglet du navigateur #}
+{% block title %}{{ projet.titre }} - TaskLinker{% endblock %}
+
+{# Contenu du header vert (titre + avatars + bouton) #}
+{% block header_content %}
+   <div class="flex-header">
+         <h1>{{ projet.titre }}</h1>
+
+         <div class="user-list">
+            {# Avatars des membres du projet #}
+            {% for employe in projet.employes %}
+               <div class="avatar">
+                     {{ employe.prenom|first|upper }}{{ employe.nom|first|upper }}
+               </div>
+            {% else %}
+               <p>Aucun membre associé.</p>
+            {% endfor %}
+         </div>
+
+         <a class="button" href="{{ path('app_project_edit', { id: projet.id }) }}">
+            Modifier
+         </a>
+   </div>
+{% endblock %}
+
+{# Corps de la page : colonnes To Do / Doing / Done #}
+{% block body %}
+
+   <div id="tasks-container">
+
+      {# ----- Colonne To Do ----- #}
+      <div class="task-column">
+         <h2>To Do</h2>
+         <div class="tasks-list">
+               {% for tache in tachesTodo %}
+                  <a class="task" href="{{ path('app_tache_edit', { id: tache.id }) }}">
+                     <h3>{{ tache.titre }}</h3>
+
+                        {% if tache.description %}
+                           <p>{{ tache.description }}</p>
+                        {% endif %}
+
+                        <div class="task-infos">
+                           {% if tache.dateEcheance %}
+                              <div class="task-deadline">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    {{ tache.dateEcheance|date('d/m/Y') }}
+                              </div>
+                           {% endif %}
+
+                           {% if tache.employeAssigne %}
+                              <div class="mini-user">
+                                 {{ tache.employeAssigne.prenom|first|upper }}{{ tache.employeAssigne.nom|first|upper }}
+                              </div>
+                           {% endif %}
+                        </div>
+                  </a>
+               {% else %}
+                  <p>Aucune tâche pour l’instant.</p>
+               {% endfor %}
+
+               <a href="{{ path('app_tache_new', { id: projet.id }) }}" class="task-add">+ Ajouter une tâche</a>
+            </div>
+         </div>
+
+      {# ----- Colonne Doing ----- #}
+      <div class="task-column">
+         <h2>Doing</h2>
+         <div class="tasks-list">
+               {% for tache in tachesDoing %}
+                  <a class="task" href="{{ path('app_tache_edit', { id: tache.id }) }}">
+                     <h3>{{ tache.titre }}</h3>
+
+                     {% if tache.description %}
+                        <p>{{ tache.description }}</p>
+                     {% endif %}
+
+                     <div class="task-infos">
+                        {% if tache.dateEcheance %}
+                           <div class="task-deadline">
+                              <i class="fa-regular fa-calendar"></i>
+                                 {{ tache.dateEcheance|date('d/m/Y') }}
+                           </div>
+                        {% endif %}
+
+                        {% if tache.employeAssigne %}
+                           <div class="mini-user">
+                           {{ tache.employeAssigne.prenom|first|upper }}{{ tache.employeAssigne.nom|first|upper }}
+                     </div>
+                        {% endif %}
+                     </div>
+               </a>
+            {% else %}
+               <p>Aucune tâche en cours.</p>
+            {% endfor %}
+
+            <a href="{{ path('app_tache_new', { id: projet.id }) }}" class="task-add">+ Ajouter une tâche</a>
+         </div>
+      </div>
+
+      {# ----- Colonne Done ----- #}
+      <div class="task-column">
+            <h2>Done</h2>
+            <div class="tasks-list">
+               {% for tache in tachesDone %}
+                  <a class="task" href="{{ path('app_tache_edit', { id: tache.id }) }}">
+                     <h3>{{ tache.titre }}</h3>
+
+                     {% if tache.description %}
+                        <p>{{ tache.description }}</p>
+                     {% endif %}
+
+                     <div class="task-infos">
+                        {% if tache.dateEcheance %}
+                           <div class="task-deadline">
+                              <i class="fa-regular fa-calendar"></i>
+                              {{ tache.dateEcheance|date('d/m/Y') }}
+                           </div>
+                        {% endif %}
+
+                        {% if tache.employeAssigne %}
+                           <div class="mini-user">
+                              {{ tache.employeAssigne.prenom|first|upper }}{{ tache.employeAssigne.nom|first|upper }}
+                           </div>
+                        {% endif %}
+                     </div>
+                  </a>
+            {% else %}
+               <p>Aucune tâche terminée.</p>
+            {% endfor %}
+            <a href="{{ path('app_tache_new', { id: projet.id }) }}" class="task-add">+ Ajouter une tâche</a>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}

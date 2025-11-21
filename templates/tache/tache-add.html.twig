@@ -1,0 +1,46 @@
+{# templates/tache/tache-add.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{# titre de l’onglet navigateur #}
+{% block title %}Créer une tâche - TaskLinker{% endblock %}
+
+{# titre de la page (h1 dans le header) #}
+{% block page_title %}Créer une tâche{% endblock %}
+
+{% block body %}
+   <form name="tache" method="post">
+         {{ form_start(form) }}
+
+         <div>
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre) }}
+         </div>
+
+         <div>
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+         </div>
+
+         <div class="flex-form">
+            <div>
+               {{ form_label(form.dateEcheance) }}
+               {{ form_widget(form.dateEcheance) }}
+            </div>
+            <div>
+               {{ form_label(form.statut) }}
+               {{ form_widget(form.statut) }}
+            </div>
+         </div>
+
+         <div>
+            {{ form_label(form.employeAssigne) }}
+            {{ form_widget(form.employeAssigne) }}
+         </div>
+
+      <br>
+      <button class="button button-submit">Ajouter</button>
+
+      {{ form_end(form) }}
+   </form>
+{% endblock %}

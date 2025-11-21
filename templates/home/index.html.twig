@@ -12,7 +12,7 @@
         {# Boucle sur la liste des projets envoyés par le contrôleur #}
         {% for projet in projets %}
             <article class="card-project">
-                <a href="#">
+                <a href="{{ path('app_project_show', { id: projet.id }) }}">
                     <h2>{{ projet.titre }}</h2>
                 </a>
 
@@ -26,7 +26,7 @@
         {% endfor %}
 
         <article class="card-project">
-            <a href="#">
+            <a href="{{ path('app_project_new') }}">
                 <i class="fa-solid fa-circle-plus add-project-icon"></i>
                 <h2>Ajouter un projet</h2>
             </a>

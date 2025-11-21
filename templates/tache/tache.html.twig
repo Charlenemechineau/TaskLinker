@@ -1,0 +1,57 @@
+{# templates/tache/tache.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{# Titre de l'onglet du navigateur #}
+{% block title %}{{ tache.titre }} - TaskLinker{% endblock %}
+
+{# Titre de la page #}
+{% block page_title %}Gestion de la tâche{% endblock %}
+
+{% block body %}
+      <form name="tache" method="post">
+         {{ form_start(form) }}
+
+         <div>
+            {# Titre de la tâche #}
+            {{ form_label(form.titre, 'Titre de la tâche', {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.titre) }}
+         </div>
+
+         <div>
+            {# Description #}
+            {{ form_label(form.description, 'Description') }}
+            {{ form_widget(form.description) }}
+         </div>
+
+         <div class="flex-form">
+            <div>
+               {# Date #}
+               {{ form_label(form.dateEcheance, 'Date') }}
+               {{ form_widget(form.dateEcheance) }}
+            </div>
+            <div>
+               {# Statut #}
+               {{ form_label(form.statut, 'Statut', {'label_attr': {'class': 'required'}}) }}
+               {{ form_widget(form.statut) }}
+            </div>
+         </div>
+
+         <div>
+            {# Membre #}
+            {{ form_label(form.employeAssigne, 'Membre') }}
+            {{ form_widget(form.employeAssigne) }}
+         </div>
+
+         <br>
+
+         <button class="button button-submit">Modifier</button>
+
+         {# Lien pour supprimer la tâche #}
+         <a href="{{ path('app_tache_delete', { id: tache.id }) }}" class="delete-task">
+            Supprimer la tâche
+         </a>
+
+      {{ form_end(form) }}
+   </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{# templates/projet/projet-edit.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le projet - TaskLinker{% endblock %}
+{% block page_title %}Modifier le projet{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+        <div>
+            {# Champ titre du projet #}
+            {{ form_label(form.titre, 'Titre du projet', {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.titre) }}
+        </div>
+
+        <div>
+            {# Champ pour inviter des membres #}
+            {{ form_label(form.employes, 'Inviter des membres') }}
+            {{ form_widget(form.employes) }}
+        </div>
+
+        <br>
+
+        <button class="button button-submit">Modifier</button>
+
+    {{ form_end(form) }}
+{% endblock %}

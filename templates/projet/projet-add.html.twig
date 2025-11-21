@@ -1,0 +1,28 @@
+{# templates/projet/projet-add.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau projet - TaskLinker{% endblock %}
+{% block page_title %}Nouveau projet{% endblock %}
+
+{% block body %}
+   {{ form_start(form) }}
+
+         <div>
+            {# Champ titre du projet #}
+            {{ form_label(form.titre, 'Titre du projet', {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.titre) }}
+         </div>
+
+         <div>
+            {# Champ pour inviter des membres (employés) #}
+            {{ form_label(form.employes, 'Inviter des membres') }}
+            {{ form_widget(form.employes) }}
+         </div>
+
+         <br>
+
+         <button class="button button-submit">Continuer</button>
+
+    {{ form_end(form) }}
+{% endblock %}
