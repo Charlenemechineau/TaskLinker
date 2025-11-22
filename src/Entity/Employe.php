@@ -16,30 +16,30 @@ class Employe
     #[ORM\Column]
     private ?int $id = null;
 
-    // prénom (obligatoire)
+    // prénom (obligatoire) le assert permet de valider les données//
     #[ORM\Column(length: 100)]
     #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
     #[Assert\Length(max: 100, maxMessage: "Le prénom est trop long.")]
     private ?string $prenom = null;
 
-    // nom (obligatoire)
+    // nom (obligatoire) le assert permet de valider les données//
     #[ORM\Column(length: 100)]
     #[Assert\NotBlank(message: "Le nom est obligatoire.")]
     #[Assert\Length(max: 100)]
     private ?string $nom = null;
 
-    // email (obligatoire + format)
+    // email (obligatoire + format) le assert permet de valider les données//
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank(message: "L'email est obligatoire.")]
     #[Assert\Email(message: "L'email n'est pas valide.")]
     private ?string $email = null;
 
-    // statut (obligatoire)
+    // statut (obligatoire) permet de savoir si l’employé est actif ou inactif//
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: "Le statut est obligatoire.")]
     private ?string $statut = null;
 
-    // date d'entrée (obligatoire)
+    // date d'entrée (obligatoire) le assert permet de valider les données//
     #[ORM\Column]
     #[Assert\NotNull(message: "La date d'entrée est requise.")]
     #[Assert\Type(\DateTimeImmutable::class)]
@@ -49,6 +49,7 @@ class Employe
      * ici j’ai la liste des projets auxquels cet employé participe
      * le many to many consiste en ce qu’un employé peut être dans plusieurs projets
      * et qu’un projet peut avoir plusieurs employés
+     * le mappedby indique que la relation est gérée par l'entité Projet via son attribut employes//
      * @var Collection<int, Projet>
      */
     #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'employes')]
@@ -123,7 +124,7 @@ class Employe
         return $this->projets; 
     }
 
-    // ici j'ajoute un projet à cet employé (si ce n'est pas déjà fait) et met à jour la relation inverse.
+    // cette methode me permet d’ajouter un projet à cet employé et met à jour la relation inverse si besoin.//
     public function addProjet(Projet $projet): static 
     { 
         if (!$this->projets->contains($projet)) 

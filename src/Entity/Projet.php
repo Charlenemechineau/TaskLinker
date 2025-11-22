@@ -83,7 +83,7 @@ return $this;
     }
 
     /**
-     * ici j’ajoute un employé au projet (si il n’y est pas déjà)
+     * ici j’ajoute un employé au projet le contains vérifie qu’il n’est pas déjà là et le add l’ajoute//
      */
     public function addEmploye(Employe $employe): static
     {
@@ -95,7 +95,7 @@ return $this;
     }
 
     /**
-     * ici je retire un employé du projet
+     * ici je retire un employé du projet avec le removeElement  qui le supprime//
      */
     public function removeEmploye(Employe $employe): static
     {

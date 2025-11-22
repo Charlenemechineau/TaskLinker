@@ -14,10 +14,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class EmployeController extends AbstractController
 {
+    //Methode qui affiche la liste des employés//
     #[Route('/employes', name: 'app_employe_index')]
     public function index(EmployeRepository $employeRepository): Response
     {
-        // je récupère tous les employés
+        // je récupère tous les employés le findall permet de tout récupérer//
         $employes = $employeRepository->findAll();
 
         return $this->render('employe/employes.html.twig', [
@@ -25,6 +26,7 @@ final class EmployeController extends AbstractController
         ]);
     }
 
+    //Methode qui permet de créer un nouvel employé//
     #[Route('/employe/{id}', name: 'app_employe_edit')]
     public function edit(
         Employe $employe,
@@ -49,13 +51,14 @@ final class EmployeController extends AbstractController
         ]);
     }
 
+    //Methode qui permet de supprimer un employé //
     #[Route('/employe/{id}/supprimer', name: 'app_employe_delete')]
     public function delete(
         Employe $employe,
         TacheRepository $tacheRepository,
         EntityManagerInterface $em
     ): Response {
-        // 1) je le retire de tous les projets
+        // 1) je le retire de tous les projets car je recupère la liste des projets liés à l’employé//
         foreach ($employe->getProjets() as $projet) {
             $projet->removeEmploye($employe);
         }
@@ -67,11 +70,11 @@ final class EmployeController extends AbstractController
             $tache->setEmployeAssigne(null);
         }
 
-        // 3) je supprime l’employé
+        // 3) je supprime l’employé remove supprime l’entité et flush exécute//
         $em->remove($employe);
         $em->flush();
 
-        // retour sur la liste de l’équipe
+        // retour sur la liste de l’équipe après suppression//
         return $this->redirectToRoute('app_employe_index');
     }
 }

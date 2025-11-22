@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ProjetController extends AbstractController
 {
+    // methode qui affiche les détails d’un projet//
     #[Route('/projet/{id}', name: 'app_project_show', requirements: ['id' => '\d+'])]
     public function show(Projet $projet, TacheRepository $tacheRepository): Response
     {
@@ -40,6 +41,7 @@ final class ProjetController extends AbstractController
         ]);
     }
 
+    // methode qui permet de créer un nouveau projet//
     #[Route('/projet/nouveau', name: 'app_project_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -68,6 +70,7 @@ final class ProjetController extends AbstractController
         ]);
     }
 
+    // methode qui permet de modifier un projet existant//
     #[Route('/projet/{id}/modifier', name: 'app_project_edit')]
     public function edit(Projet $projet, Request $request, EntityManagerInterface $em): Response
     {
@@ -90,6 +93,7 @@ final class ProjetController extends AbstractController
         ]);
     }
 
+    // methode qui permet d’archiver un projet//
     #[Route('/projet/{id}/archiver', name: 'app_project_archive')]
     public function archive(Projet $projet, EntityManagerInterface $em): Response
     {

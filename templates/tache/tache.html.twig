@@ -1,5 +1,7 @@
 {# templates/tache/tache.html.twig #}
 
+{# ce template me permet d’afficher le formulaire de modification d’une tâche #}
+
 {% extends 'base.html.twig' %}
 
 {# Titre de l'onglet du navigateur #}
@@ -9,6 +11,9 @@
 {% block page_title %}Gestion de la tâche{% endblock %}
 
 {% block body %}
+
+   {# ici j'utilise pour le formulaire de modification d'une tache le form label me permet d'afficher le label du champ # 
+   et form_widget lui me permet d'afficher le champ lui-même #}
       <form name="tache" method="post">
          {{ form_start(form) }}
 
@@ -47,7 +52,7 @@
 
          <button class="button button-submit">Modifier</button>
 
-         {# Lien pour supprimer la tâche #}
+         {# Lien pour supprimer la tâche  le id: tache id permet d’indiquer quelle tâche supprimer #}
          <a href="{{ path('app_tache_delete', { id: tache.id }) }}" class="delete-task">
             Supprimer la tâche
          </a>

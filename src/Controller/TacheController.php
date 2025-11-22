@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class TacheController extends AbstractController
 {
 
-    //Création d'une nouvelle tâche //
+    //Permet la création d'une nouvelle tâche //
 
     #[Route('/projet/{id}/tache/nouvelle', name: 'app_tache_new')]
     public function new(Projet $projet, Request $request, EntityManagerInterface $em): Response
@@ -30,7 +30,7 @@ final class TacheController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // si tout est bon, j’enregistre en BDD
+            // si tout est bon, j’enregistre en BDD le persist prépare l’enregistrement et le flush l’exécute//
             $em->persist($tache);
             $em->flush();
 
@@ -48,7 +48,7 @@ final class TacheController extends AbstractController
     }
 
 
-    // Modification d'une tâche //
+    // permet la modification d'une tâche //
     #[Route('/tache/{id}/modifier', name: 'app_tache_edit')]
     public function edit(Tache $tache, Request $request, EntityManagerInterface $em): Response
     {
@@ -72,13 +72,13 @@ final class TacheController extends AbstractController
         ]);
     }
 
-    // Suppression d'une tâche //
+    // Permet la suppression d'une tâche //
     #[Route('/tache/{id}/supprimer', name: 'app_tache_delete')]
     public function delete(Tache $tache, EntityManagerInterface $em): Response
     {
-        // je garde le projet pour pouvoir rediriger après la suppression
+        // je garde le projet pour pouvoir rediriger après la suppression le remove supprime l'entité et le flush exécute//
         $projet = $tache->getProjet();
-
+ 
         $em->remove($tache);
         $em->flush();
 

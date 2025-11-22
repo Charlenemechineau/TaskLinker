@@ -1,5 +1,7 @@
 {# templates/home/index.html.twig #}
 
+{# ce template est ma page d’accueil qui affiche la liste des projets #}
+
 {# ici je réutilise le layout général #}
 {% extends 'base.html.twig' %}
 
@@ -12,7 +14,7 @@
 {% block body %}
     <div id="projects-container">
 
-        {# ici je parcours la liste des projets envoyés par le contrôleur #}
+        {# ici je parcours la liste des projets envoyés par le contrôleur en faisant une boucle #}
         {% for projet in projets %}
             <article class="card-project">
                 {# quand je clique sur la carte, je vais sur la page du projet #}

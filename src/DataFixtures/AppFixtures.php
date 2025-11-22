@@ -12,7 +12,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Ici j’ai créé trois employés avec leurs informations de base
+        // Ici j’ai créé trois employés avec leurs informations de base en reprennannt les attributs de l'employé//
+       
         $alice = new Employe();
         $alice->setPrenom("Alice");
         $alice->setNom("Dupont");
@@ -37,7 +38,7 @@ class AppFixtures extends Fixture
         $clara->setDateEntree(new \DateTimeImmutable('2024-02-01'));
         $manager->persist($clara);
 
-        // Ici j’ai créé deux projets et j’y ai ajouté des employés
+        // Ici j’ai créé deux projets et j’y ai ajouté des employés en reprennant les attributs du projet//
         $projet1 = new Projet();
         $projet1->setTitre("Refonte site web");
         $projet1->setArchive(false);
@@ -52,7 +53,7 @@ class AppFixtures extends Fixture
         $projet2->addEmploye($alice);
         $manager->persist($projet2);
 
-        // Ici j’ai ajouté quatre tâches réparties dans les deux projets
+        // Ici j’ai ajouté quatre tâches réparties dans les deux projets en reprennant les attributs de la tâche//
         $t1 = new Tache();
         $t1->setTitre("Faire le cahier des charges");
         $t1->setDescription("Lister les pages à refaire et les contenus.");
@@ -84,7 +85,7 @@ class AppFixtures extends Fixture
         $t4->setProjet($projet2);
         $manager->persist($t4);
 
-        // Ici j’enregistre toutes les données dans la base
+        // Ici j’enregistre toutes les données dans la base//
         $manager->flush();
     }
 }
