@@ -1,0 +1,50 @@
+{# templates/employe/employe.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ employe.prenom }} {{ employe.nom }} - TaskLinker{% endblock %}
+{% block page_title %}{{ employe.prenom }} {{ employe.nom }}{% endblock %}
+
+{% block body %}
+   {# formulaire Symfony pour l’employé #}
+   {{ form_start(form) }}
+
+      <div>
+         <label for="employe_nom" class="required">Nom</label>
+         {{ form_widget(form.nom, {
+            attr: { id: 'employe_nom', maxlength: 255 }
+         }) }}
+      </div>
+
+      <div>
+         <label for="employe_prenom" class="required">Prénom</label>
+         {{ form_widget(form.prenom, {
+            attr: { id: 'employe_prenom', maxlength: 255 }
+         }) }}
+      </div>
+
+      <div>
+         <label for="employe_email" class="required">Email</label>
+         {{ form_widget(form.email, {
+            attr: { id: 'employe_email' }
+         }) }}
+      </div>
+
+      <div class="form-flex">
+         <div>
+            <label for="employe_dateArrivee" class="required">Date d'entrée</label>
+            {{ form_widget(form.dateEntree, {
+               attr: { id: 'employe_dateArrivee' }
+            }) }}
+         </div>
+         <div>
+            <label for="employe_statut" class="required">Statut</label>
+            {{ form_widget(form.statut, {
+               attr: { id: 'employe_statut', maxlength: 255 }
+            }) }}
+            </div>
+      </div>
+         <button class="button button-submit">Enregistrer</button>
+
+   {{ form_end(form) }}
+{% endblock %}

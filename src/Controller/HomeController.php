@@ -2,20 +2,21 @@
 
 namespace App\Controller;
 
-use App\Repository\ProjetRepository;  // 1) On ajoute ça
+use App\Repository\ProjetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
+    // Ceci est la route de ma page d'accueil
     #[Route('/', name: 'app_home')]
     public function index(ProjetRepository $projetRepository): Response
     {
-        // 2) On récupère les projets avec Doctrine
+        // je récupère tous les projets en base de données
         $projets = $projetRepository->findAll();
 
-        // 3) On envoie les projets au template Twig
+        // j'envoie la liste des projets au template Twig
         return $this->render('home/index.html.twig', [
             'projets' => $projets,
         ]);

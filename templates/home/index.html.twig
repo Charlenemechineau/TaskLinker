@@ -1,30 +1,39 @@
-
 {# templates/home/index.html.twig #}
 
+{# ici je réutilise le layout général #}
 {% extends 'base.html.twig' %}
 
+{# titre de l’onglet du navigateur #}
 {% block title %}Liste des projets - TaskLinker{% endblock %}
+
+{# titre affiché en haut de la page #}
 {% block page_title %}Projets{% endblock %}
 
 {% block body %}
     <div id="projects-container">
 
-        {# Boucle sur la liste des projets envoyés par le contrôleur #}
+        {# ici je parcours la liste des projets envoyés par le contrôleur #}
         {% for projet in projets %}
             <article class="card-project">
-                <a href="{{ path('app_project_show', { id: projet.id }) }}">
+                {# quand je clique sur la carte, je vais sur la page du projet #}
+                <a href="{{ path('app_project_show', {id: projet.id}) }}">
                     <h2>{{ projet.titre }}</h2>
                 </a>
 
                 <div class="card-project-icons">
-                    <a href="#"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#"><i class="fa-solid fa-trash"></i></a>
+                    {# bouton pour modifier le projet #}
+                    <a href="{{ path('app_project_edit', {id: projet.id}) }}"><i class="fa-solid fa-pen"></i></a>
+
+                    {# bouton pour archiver le projet #}
+                    <a href="{{ path('app_project_archive', {id: projet.id}) }}"><i class="fa-solid fa-trash"></i></a>
                 </div>
             </article>
         {% else %}
+            {# si je n’ai aucun projet en base, j’affiche un message #}
             <p>Aucun projet à afficher.</p>
         {% endfor %}
 
+        {# carte spéciale pour créer un nouveau projet #}
         <article class="card-project">
             <a href="{{ path('app_project_new') }}">
                 <i class="fa-solid fa-circle-plus add-project-icon"></i>

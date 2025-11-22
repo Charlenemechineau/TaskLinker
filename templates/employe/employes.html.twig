@@ -1,0 +1,56 @@
+{# templates/employe/employes.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés - TaskLinker{% endblock %}
+{% block page_title %}Équipe{% endblock %}
+
+{% block body %}
+   <table id="team-container">
+      <thead>
+         <tr>
+            <th>Prénom, Nom</th>
+            <th>Statut</th>
+            <th>Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+      {# je boucle sur tous les employés #}
+      {% for employe in employes %}
+         <tr>
+            <td>
+               <div class="employee-infos">
+                  <div class="employee-avatar">
+                     {# avatar avec les initiales (prénom + nom) #}
+                     {{ employe.prenom|first|upper }}{{ employe.nom|first|upper }}
+                  </div>
+                  {#ici j'affiche les coordonnées de l'employé #}
+                  <div class="employee-coords">
+                     <strong>{{ employe.prenom }} {{ employe.nom }}</strong>
+                        <span>{{ employe.email }}</span>
+                  </div>
+               </div>
+               </td>
+               <td>{{ employe.statut }}</td>
+               <td>
+               {# ici ce trouve les boutons pour éditer ou supprimer un employé #}
+                  <a class="button button-edit-team"
+                     href="{{ path('app_employe_edit', { id: employe.id }) }}">
+                     Éditer
+                  </a>
+
+                  <a class="delete-team"
+                     href="{{ path('app_employe_delete', { id: employe.id }) }}"
+                     onclick="return confirm('Supprimer cet employé ?');">
+                     Supprimer
+                  </a>
+               </td>
+            </tr>
+      {% else %}
+            <tr>
+               <td colspan="3">Aucun employé trouvé.</td>
+            </tr>
+      {% endfor %}
+      </tbody>
+   </table>
+{% endblock %}

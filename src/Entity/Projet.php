@@ -18,7 +18,10 @@ class Projet
     private ?int $id = null;
 
     
+    // titre (obligatoire)
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message: "Le titre du projet est obligatoire.")]
+    #[Assert\Length(max: 150)]
     private ?string $titre = null;
 
     
@@ -67,7 +70,7 @@ class Projet
     {
         $this->Archive = $Archive;
 
-        return $this;
+return $this;
     }
 
     /**

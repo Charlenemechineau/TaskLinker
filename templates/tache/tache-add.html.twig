@@ -1,46 +1,49 @@
 {# templates/tache/tache-add.html.twig #}
-
 {% extends 'base.html.twig' %}
 
-{# titre de l’onglet navigateur #}
 {% block title %}Créer une tâche - TaskLinker{% endblock %}
-
-{# titre de la page (h1 dans le header) #}
 {% block page_title %}Créer une tâche{% endblock %}
 
 {% block body %}
-   <form name="tache" method="post">
-         {{ form_start(form) }}
+   {{ form_start(form) }}
 
-         <div>
-            {{ form_label(form.titre) }}
-            {{ form_widget(form.titre) }}
-         </div>
+   <div>
+      <label>Titre de la tâche</label>
+      {{ form_widget(form.titre) }}
+      {# Affiche les erreurs liées à ce champ (si validation échoue) #}
+      {{ form_errors(form.titre) }}
+   </div>
 
-         <div>
-            {{ form_label(form.description) }}
-            {{ form_widget(form.description) }}
-         </div>
+   <div>
+   {# permet d'afficher le label, le widget et les erreurs pour la description #}
+      <label>Description</label>
+      {{ form_widget(form.description) }}
+      {{ form_errors(form.description) }}
+   </div>
 
-         <div class="flex-form">
-            <div>
-               {{ form_label(form.dateEcheance) }}
-               {{ form_widget(form.dateEcheance) }}
-            </div>
-            <div>
-               {{ form_label(form.statut) }}
-               {{ form_widget(form.statut) }}
-            </div>
-         </div>
+   <div class="flex-form">
+      <div>
+      {# permet d'afficher le label, le widget et les erreurs pour la date d'échéance #}
+         <label>Date</label>
+         {{ form_widget(form.dateEcheance) }}
+         {{ form_errors(form.dateEcheance) }}
+      </div>
+      <div>
+      {# permet d'afficher le label, le widget et les erreurs pour le statut #}
+         <label>Statut</label>
+         {{ form_widget(form.statut) }}
+         {{ form_errors(form.statut) }}
+      </div>
+   </div>
 
-         <div>
-            {{ form_label(form.employeAssigne) }}
-            {{ form_widget(form.employeAssigne) }}
-         </div>
+   <div>
+   {# permet d'afficher le label, le widget et les erreurs pour le membre assigné #}
+      <label>Membre</label>
+      {{ form_widget(form.employeAssigne) }}
+      {{ form_errors(form.employeAssigne) }}
+   </div>
 
-      <br>
-      <button class="button button-submit">Ajouter</button>
+   <button class="button button-submit">Ajouter</button>
 
-      {{ form_end(form) }}
-   </form>
+   {{ form_end(form) }}
 {% endblock %}
