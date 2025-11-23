@@ -14,7 +14,11 @@ final class HomeController extends AbstractController
     public function index(ProjetRepository $projetRepository): Response
     {
         // je récupère tous les projets en base de données
-        $projets = $projetRepository->findAll();
+        $projets = $projetRepository->findby([
+            'archive' => false,
+        ]
+
+        );
 
         // j'envoie la liste des projets au template Twig
         return $this->render('home/index.html.twig', [

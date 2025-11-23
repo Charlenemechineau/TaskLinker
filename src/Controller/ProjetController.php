@@ -49,11 +49,11 @@ final class ProjetController extends AbstractController
         $projet = new Projet();
         $projet->setArchive(false);
 
-        // je crée le formulaire à partir de ProjetType
+        // je crée le formulaire à partir de ProjetType et le handleRequest permet de récupérer les données//
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
 
-        // si le formulaire est envoyé et valide, j’enregistre
+        // si le formulaire est envoyé et valide, j’enregistre le persist permet de préparer l’enregistrement et le flush de l’exécuter//
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($projet);
             $em->flush();
@@ -71,15 +71,15 @@ final class ProjetController extends AbstractController
     }
 
     // methode qui permet de modifier un projet existant//
-    #[Route('/projet/{id}/modifier', name: 'app_project_edit')]
+    #[Route('/projet/{id}/modifier', name: 'app_project_edit', requirements: ['id' => '\d+'])]
     public function edit(Projet $projet, Request $request, EntityManagerInterface $em): Response
     {
-        // le formulaire est pré-rempli avec les infos du projet
+        // le formulaire est pré-rempli avec les infos du projet et recupère les données//
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // pas besoin de persist, le projet existe déjà
+            // pas besoin de persist, le projet existe déjà car l'enregistrement est géré par Doctrine//
             $em->flush();
 
             return $this->redirectToRoute('app_project_show', [
@@ -94,12 +94,13 @@ final class ProjetController extends AbstractController
     }
 
     // methode qui permet d’archiver un projet//
-    #[Route('/projet/{id}/archiver', name: 'app_project_archive')]
+    #[Route('/projet/{id}/archiver', name: 'app_project_archive', requirements: ['id' => '\d+'])]
     public function archive(Projet $projet, EntityManagerInterface $em): Response
     {
-        // ici je n’efface pas le projet, je le passe juste en archivé
+        // ici je n’efface pas le projet, je le passe juste en archivé //
         $projet->setArchive(true);
         $em->flush();
+
 
         // je reviens sur la liste des projets
         return $this->redirectToRoute('app_home');

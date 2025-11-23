@@ -16,7 +16,7 @@ final class TacheController extends AbstractController
 
     //Permet la création d'une nouvelle tâche //
 
-    #[Route('/projet/{id}/tache/nouvelle', name: 'app_tache_new')]
+    #[Route('/projet/{id}/tache/nouvelle', name: 'app_tache_new', requirements: ['id' => '\d+'])]
     public function new(Projet $projet, Request $request, EntityManagerInterface $em): Response
     {
         // je crée une nouvelle tâche et je la rattache au projet
@@ -49,7 +49,7 @@ final class TacheController extends AbstractController
 
 
     // permet la modification d'une tâche //
-    #[Route('/tache/{id}/modifier', name: 'app_tache_edit')]
+    #[Route('/tache/{id}/modifier', name: 'app_tache_edit', requirements: ['id' => '\d+'])]
     public function edit(Tache $tache, Request $request, EntityManagerInterface $em): Response
     {
         // ici le formulaire est pré-rempli avec la tâche passée en paramètre
@@ -73,12 +73,11 @@ final class TacheController extends AbstractController
     }
 
     // Permet la suppression d'une tâche //
-    #[Route('/tache/{id}/supprimer', name: 'app_tache_delete')]
+    #[Route('/tache/{id}/supprimer', name: 'app_tache_delete', requirements: ['id' => '\d+'])]
     public function delete(Tache $tache, EntityManagerInterface $em): Response
     {
         // je garde le projet pour pouvoir rediriger après la suppression le remove supprime l'entité et le flush exécute//
         $projet = $tache->getProjet();
- 
         $em->remove($tache);
         $em->flush();
 

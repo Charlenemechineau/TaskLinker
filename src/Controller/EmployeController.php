@@ -27,7 +27,7 @@ final class EmployeController extends AbstractController
     }
 
     //Methode qui permet de créer un nouvel employé//
-    #[Route('/employe/{id}', name: 'app_employe_edit')]
+    #[Route('/employe/{id}', name: 'app_employe_edit' , requirements: ['id' => '\d+'])]
     public function edit(
         Employe $employe,
         Request $request,
@@ -52,7 +52,7 @@ final class EmployeController extends AbstractController
     }
 
     //Methode qui permet de supprimer un employé //
-    #[Route('/employe/{id}/supprimer', name: 'app_employe_delete')]
+    #[Route('/employe/{id}/supprimer', name: 'app_employe_delete' , requirements: ['id' => '\d+'])]
     public function delete(
         Employe $employe,
         TacheRepository $tacheRepository,

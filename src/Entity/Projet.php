@@ -26,7 +26,7 @@ class Projet
 
     
     #[ORM\Column]
-    private ?bool $Archive = null;
+    private ?bool $archive = null;
 
     /**
      * ici j’ai la liste des employés qui participent à ce projet
@@ -63,12 +63,12 @@ class Projet
 
     public function isArchive(): ?bool
     {
-        return $this->Archive;
+        return $this->archive;
     }
 
-    public function setArchive(bool $Archive): static
+    public function setArchive(bool $archive): static
     {
-        $this->Archive = $Archive;
+        $this->archive = $archive;
 
 return $this;
     }
